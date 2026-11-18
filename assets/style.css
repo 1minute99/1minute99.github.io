@@ -308,6 +308,23 @@ a.project-card:hover {
 
 .project-meta { margin: 0; color: var(--faint); font-size: 13px; }
 
+/* Publication status pill (cards and project-page eyebrow) */
+.status {
+  display: inline-block;
+  margin-left: 2px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+.status.muted { background: var(--surface-2); color: var(--muted); }
+
 .project-title {
   margin: 4px 0 4px;
   font-family: var(--serif);
@@ -498,6 +515,7 @@ a.project-card:hover {
 .figure-img:hover { border-color: var(--accent); }
 .figure-img img { display: block; width: 100%; height: auto; margin: 0 auto; }
 .figure.narrow .figure-img img { max-width: 500px; }
+.figure.small .figure-img img { max-width: 320px; }
 .figure figcaption {
   margin: 12px 0 0;
   color: var(--muted);

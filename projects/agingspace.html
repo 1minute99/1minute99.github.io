@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mitochondrial Aging Axis</title>
+  <meta name="description" content="Representation learning on live-cell mitochondrial images defines an aging axis and age-dependent drug responses in primary human fibroblasts — Elisavetta Ilyin, Wonmin Kim and Johannes Schöneberg, UC San Diego. Manuscript in preparation.">
+  <link rel="icon" href="../favicon.ico?v=3" sizes="32x32">
+  <link rel="icon" href="../assets/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+  <link rel="stylesheet" href="../assets/style.css?v=10">
+</head>
+<body>
+  <div class="container">
+
+    <header class="site-header">
+      <a class="brand" href="../index.html">Wonmin Kim</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#projects">Projects</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ Title block ============ -->
+      <!-- Work in progress: manuscript Fig. 5 (the axis screen and its candidate compounds) is deliberately left out. -->
+      <section class="paper-hero">
+        <p class="eyebrow">Research · 2026 <span class="status muted">Manuscript in preparation</span></p>
+
+        <div class="channel-bar" aria-hidden="true">
+          <span style="background:#3fbf5f"></span>
+          <span style="background:#e5484d"></span>
+        </div>
+
+        <h1 class="paper-title">
+          Representation learning on live-cell mitochondrial images
+          <span class="subtitle">defines an aging axis and age-dependent drug responses in primary human fibroblasts</span>
+        </h1>
+
+        <p class="authors">
+          Elisavetta Ilyin<sup>1,*</sup>,
+          <a href="../index.html">Wonmin Kim</a><sup>1,2,*</sup>,
+          Johannes Schöneberg<sup>1,3</sup>
+        </p>
+        <p class="affil">
+          <span class="nowrap"><sup>1</sup>Pharmacology</span> &nbsp;·&nbsp;
+          <span class="nowrap"><sup>2</sup>Electrical and Computer Engineering</span> &nbsp;·&nbsp;
+          <span class="nowrap"><sup>3</sup>Biochemistry &amp; Molecular Biophysics</span>
+          <br><span class="nowrap">University of California San Diego</span> &nbsp;·&nbsp; <span class="nowrap"><sup>*</sup>Equal contribution</span>
+        </p>
+
+        <div class="btn-row">
+          <!-- TODO: when the paper and code are public, change these to <a class="btn" href="..."> and drop "is-disabled" -->
+          <span class="btn is-disabled" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></svg>
+            Paper (soon)
+          </span>
+          <span class="btn secondary is-disabled" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>
+            Code (soon)
+          </span>
+        </div>
+      </section>
+
+      <!-- ============ TL;DR + key numbers ============ -->
+      <div class="intro">
+        <p class="tldr">
+          <strong>TL;DR</strong>
+          We imaged mitochondria in 144,624 living human fibroblasts from three adult and three
+          neonatal donors, treated with 37 compounds, and trained a self-supervised encoder
+          without age or compound labels. Its embedding reads a donor's age group from
+          mitochondria alone, defines an aging axis from adult to neonatal cells, and shows that
+          the same compound acts differently on adult and neonatal cells.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-num">144,624</span>
+            <span class="stat-label">living cells, imaged on 38 plates</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">0.92</span>
+            <span class="stat-label">AUC for the age group of a held-out donor</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">37</span>
+            <span class="stat-label">compounds on 3 adult and 3 neonatal donors</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">33 of 37</span>
+            <span class="stat-label">compounds whose responses agree less across age groups</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ Motivation ============ -->
+      <section class="section prose" aria-labelledby="motivation">
+        <h2 id="motivation">Motivation</h2>
+        <p>
+          Mitochondria change with age, and the shape of the mitochondrial network is a sensitive
+          readout of how a cell responds to drugs. Yet drug responses are rarely compared between
+          ages in living cells. Biological age is usually read from DNA methylation or
+          transcription, which consumes the cells it measures, and mitochondrial images are
+          usually reduced to a few predefined measurements such as branch length or object count.
+        </p>
+        <p>
+          We ask whether a model that learns mitochondrial phenotype <em>without labels</em> can
+          read donor age and drug response together, in the same living cells.
+        </p>
+      </section>
+
+      <!-- ============ Method ============ -->
+      <section class="section prose" aria-labelledby="method">
+        <h2 id="method">Method: live imaging and self-supervised learning</h2>
+        <p>
+          Primary dermal fibroblasts from three neonatal and three adult donors (45–49 years) were
+          treated for 4 h or 18 h with one of 37 compounds acting on mitochondria and related
+          pathways, and imaged live with MitoTracker Green and the membrane-potential-sensitive dye
+          TMRM. After single-cell segmentation, a convolutional encoder was trained on the cells by
+          self-supervised learning.
+        </p>
+
+        <figure class="figure">
+          <a class="figure-img" href="../assets/figures/agingspace/pipeline.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/agingspace/pipeline.png" width="1886" height="1020"
+                 alt="Pipeline. (c) Live fibroblasts stained with MitoTracker Green and TMRM, imaged in 96-well plates. (d) Single-cell segmentation and preprocessing. (e) Self-supervised training with an online and an EMA target network, a view-consistency loss and an MMD loss that aligns untreated control cells across plates. (f) The frozen encoder's embedding, coloured by donor and by drug, interpreted with handcrafted features.">
+          </a>
+          <figcaption>
+            <b>Figure 1.</b> Pipeline. (c) Live cells stained with MitoTracker Green and TMRM in
+            96-well plates. (d) Single-cell segmentation, then scaling of each cell's intensities
+            to the untreated cells of its plate. (e) Two augmented views of a cell are made to
+            agree (L<sub>view</sub>), and a maximum mean discrepancy loss (L<sub>MMD</sub>) aligns
+            untreated cells across plates. (f) The frozen encoder's embedding is analysed directly
+            and interpreted with handcrafted features.
+          </figcaption>
+        </figure>
+
+        <div class="points">
+          <div class="point">
+            <h3><span class="dot" style="background:#3fbf5f"></span>No age or drug labels</h3>
+            <p>The encoder learns to match two altered views of a cell, or a cell and the mean of other cells in its well. Donor age and compound identity are never training targets.</p>
+          </div>
+          <div class="point">
+            <h3><span class="dot" style="background:#4c7dff"></span>Plates aligned, responses free</h3>
+            <p>Untreated cells of a donor are paired across plates and aligned with an MMD loss, keeping plate effects out. Treated cells are not aligned, so compound responses stay free.</p>
+          </div>
+          <div class="point">
+            <h3><span class="dot" style="background:#e8a33a"></span>Readable embedding</h3>
+            <p>Each cell gets a 512-dimensional embedding, benchmarked against 494 handcrafted features and six pretrained image encoders and interpreted through 36 named features.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Age ============ -->
+      <section class="section prose" aria-labelledby="age">
+        <h2 id="age">Donor age is readable from mitochondria</h2>
+        <p>
+          A classifier trained on the untreated cells of five donors assigned the cells of the
+          sixth to the correct age group with an AUC of 0.92. Of the ten ways to split the six
+          donors into two groups of three, only the split by age separated every held-out donor
+          correctly. Neonatal mitochondria were longer, larger and more branched, while adult cells
+          held more, shorter ones — but no single feature carried the difference, and the
+          embedding (AUC 0.92) captured more of it than all handcrafted features together (0.86).
+        </p>
+
+        <figure class="figure">
+          <a class="figure-img" href="../assets/figures/agingspace/age.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/agingspace/age.png" width="1607" height="549" loading="lazy"
+                 alt="(a) UMAP of the embedding shown twice, with contours around half of each donor's untreated cells: neonatal donors cluster in one region, adult donors in another. (b) Violin plots of the held-out probability of being adult: adult donors A, B and C are mostly read as adult (92, 74 and 72 percent), neonatal donors mostly as neonatal (87, 89 and 89 percent).">
+          </a>
+          <figcaption>
+            <b>Figure 2.</b> (a) Untreated cells of neonatal (left) and adult (right) donors
+            occupy different regions of the embedding; contours enclose half of each donor's
+            untreated cells. (b) Probability of being adult for each untreated cell, from a
+            classifier trained on the other five donors; percentages, cells assigned to their own
+            age group.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ Aging axis ============ -->
+      <section class="section prose" aria-labelledby="axis">
+        <h2 id="axis">An aging axis</h2>
+        <p>
+          The direction from the adult center (0) to the neonatal center (1) defines an aging
+          axis. Every adult plate had its median cell at or below 0.50 and every neonatal plate at
+          or above 0.80, while plates of one donor, imaged on different days, lay close together.
+          The axis therefore gives a unit for single cells and drug responses alike: a shift of
+          0.5 is half the difference between untreated adult and neonatal cells.
+        </p>
+
+        <figure class="figure narrow small">
+          <a class="figure-img" href="../assets/figures/agingspace/axis.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/agingspace/axis.png" width="458" height="765" loading="lazy"
+                 alt="Box plots of untreated cells' aging-axis position, one per plate, grouped by donor. All adult plates sit near the adult center and all neonatal plates near the neonatal center, with a gap between the groups.">
+          </a>
+          <figcaption>
+            <b>Figure 3.</b> Position of untreated cells on the aging axis, one box per plate
+            (n = 38). Gray band, gap between the highest adult and the lowest neonatal plate median.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ Reproducibility ============ -->
+      <section class="section prose" aria-labelledby="repro">
+        <h2 id="repro">Drug responses repeat — within an age group</h2>
+        <p>
+          Although compound identity was never a training target, wells treated with the same
+          compound retrieved each other across plates and donors. Reproducibility barely changed
+          from other plates of the same donor (replicate mAP 0.43) to other donors of the same age
+          group (0.42), but fell to 0.33 across age groups. At every level the embedding was more
+          reproducible than handcrafted features and six frozen encoders pretrained on natural
+          images or microscopy.
+        </p>
+
+        <figure class="figure narrow">
+          <a class="figure-img" href="../assets/figures/agingspace/repro.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/agingspace/repro.png" width="614" height="758" loading="lazy"
+                 alt="Bar chart of replicate mAP at three levels. Self-supervised features score 0.43, 0.42 and 0.33, above handcrafted features, OpenPhenom, Cell-DINO, DINOv2, DINOv3 and ImageNet ResNets at every level; all drop at the other-age-group level.">
+          </a>
+          <figcaption>
+            <b>Figure 4.</b> Replicate mean average precision of well responses on other plates of
+            the same donor, other donors of the same age group, and donors of the other age group
+            (n = 37 compounds). Red, self-supervised features; dashed lines, chance.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ Age-dependent responses ============ -->
+      <section class="section prose" aria-labelledby="divergence">
+        <h2 id="divergence">The same drug acts differently on adult and neonatal cells</h2>
+        <p>
+          Responses to the same compound agreed less between an adult and a neonatal donor
+          (cosine 0.26) than between two donors of the same age (0.32–0.37), for 33 of 37
+          compounds. Some compounds kept nearly the same response in both age groups; others moved
+          adult and neonatal cells in opposite directions. Response size also depended on age,
+          compound by compound, and the difference lay mainly in <em>how many</em> cells responded
+          — up to eightfold between age groups — rather than how far responding cells moved, a
+          distinction only single-cell data can make.
+        </p>
+
+        <figure class="figure">
+          <a class="figure-img" href="../assets/figures/agingspace/divergence.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/agingspace/divergence.png" width="1517" height="447" loading="lazy"
+                 alt="(d) Response agreement between plates: about 0.39 for the same donor, 0.32 for adult pairs, 0.37 for neonatal pairs and 0.26 for adult versus neonatal, a drop of 0.09. (e) Response size in neonatal relative to adult cells for 37 compounds, ranging from about twofold larger in adult cells to over threefold larger in neonatal cells.">
+          </a>
+          <figcaption>
+            <b>Figure 5.</b> (d) Agreement between responses to the same compound on two plates
+            (cosine), for the same donor, two adult donors, two neonatal donors, or an adult and a
+            neonatal donor; error bars, 95% confidence intervals over compounds. (e) Response size
+            in neonatal relative to adult cells (n = 37 compounds).
+          </figcaption>
+        </figure>
+
+        <p class="callout">
+          <strong>Why it matters.</strong> Cellular age acts as an effect modifier for
+          mitochondrial pharmacology: a compound characterized in young cells cannot be assumed to
+          behave the same way in the aged cells an intervention is meant to treat.
+        </p>
+      </section>
+
+      <!-- ============ Ongoing ============ -->
+      <section class="section prose" aria-labelledby="next">
+        <h2 id="next">Work in progress</h2>
+        <p>
+          We are now using the aging axis to screen compounds for their effect on adult cells and
+          extending the study to more donors; the current data rest on three donors per age group,
+          with adult donors aged 45–49. This page will be updated as the manuscript is completed.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p style="margin:0">© 2026 Wonmin Kim · <a href="../index.html">Back to home</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>
