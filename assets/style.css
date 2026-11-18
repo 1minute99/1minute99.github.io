@@ -124,6 +124,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 .bio p { margin: 0 0 12px; max-width: 64ch; }
+.bio .bio-status { margin-top: 4px; }
+.bio .bio-status strong { color: var(--accent); font-weight: 600; }
 
 .links {
   display: flex;
