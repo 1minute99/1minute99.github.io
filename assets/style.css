@@ -195,12 +195,14 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   color: inherit;
   transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
-.project-card:hover {
+a.project-card:hover {
   text-decoration: none;
   border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
   box-shadow: var(--shadow);
   transform: translateY(-2px);
 }
+
+.project-card + .project-card { margin-top: 16px; }
 
 .project-thumb {
   aspect-ratio: 4 / 3;
@@ -215,7 +217,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .project-meta { margin: 0; color: var(--faint); font-size: 13px; }
 
 .project-title {
-  margin: 4px 0 8px;
+  margin: 4px 0 4px;
   font-family: var(--serif);
   font-size: 1.22rem;
   font-weight: 600;
@@ -223,6 +225,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   letter-spacing: -0.005em;
 }
 
+.project-authors { margin: 0 0 10px; color: var(--faint); font-size: 13.5px; }
 .project-desc { margin: 0; color: var(--muted); font-size: 15px; }
 
 .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
@@ -412,11 +415,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .figure figcaption b { color: var(--text); font-weight: 600; }
 @media (max-width: 620px) {
   .figure-img { padding: 10px; border-radius: 12px; }
-  .figure.wide figcaption::after { content: " Tap the figure to enlarge."; color: var(--faint); }
-  table { font-size: 14px; }
-  th, td { padding: 10px 8px; }
-  th:first-child, td:first-child { padding-left: 12px; white-space: normal; min-width: 130px; }
-  th:last-child, td:last-child { padding-right: 12px; }
+  .figure:not(.narrow) figcaption::after { content: " Tap the figure to enlarge."; color: var(--faint); }
 }
 
 .callout {
@@ -487,6 +486,14 @@ tr.best td { font-weight: 600; background: var(--accent-soft); }
 tr.dim td { color: var(--faint); }
 tr.split td { border-top: 1px solid var(--faint); }
 td .ours { color: var(--accent); font-size: 12px; font-weight: 600; margin-left: 4px; }
+
+@media (max-width: 620px) {
+  table { font-size: 14px; }
+  th, td { padding: 10px 8px; }
+  th { white-space: normal; vertical-align: bottom; }
+  th:first-child, td:first-child { padding-left: 12px; white-space: normal; min-width: 120px; }
+  th:last-child, td:last-child { padding-right: 12px; }
+}
 
 .note { margin-top: 10px; color: var(--faint); font-size: 13.5px; }
 
