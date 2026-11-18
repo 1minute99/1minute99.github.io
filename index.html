@@ -1,1 +1,141 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet"/><meta name="theme-color" content="#000000"/><meta name="description" content="My name is Hashir Shoaib. I’m a graduate of 2020 from National University of Sciences and Technology at Islamabad with a degree in Computer Engineering. I'm most passionate about giving back to the community, and my goal is to pursue this passion within the field of software engineering. In my free time I like working on open source projects."/><link rel="apple-touch-icon" href="logo192.png"/><link rel="manifest" href="/manifest.json"/><meta property="twitter:image" content="/social-image.png"/><meta property="og:image" content="/social-image.png"/><title>Wonmin Kim</title><script defer="defer" src="/static/js/main.6452f00b.js"></script><link href="/static/css/main.fe927caf.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wonmin Kim</title>
+  <meta name="description" content="Wonmin Kim — machine learning for Cell Painting and image-based profiling at UC San Diego.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="site-header">
+      <a class="brand" href="index.html">Wonmin Kim</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ About ============ -->
+      <section class="hero" id="about">
+        <h1>Wonmin Kim</h1>
+        <p class="role">Electrical and Computer Engineering · University of California San Diego</p>
+
+        <div class="bio">
+          <p>
+            I work on machine learning for biological imaging at UC San Diego, together with
+            Johannes Schöneberg. My research asks what image models should be taught to describe
+            cell morphology — in particular, how to build Cell Painting representations that
+            retrieve a perturbation's effect across laboratories, rather than the lab, batch or
+            plate position an image came from.
+          </p>
+        </div>
+
+        <div class="links">
+          <a href="mailto:wok016@ucsd.edu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Email
+          </a>
+          <!-- TODO: add your links, then remove the comment markers around each one.
+          <a href="https://github.com/USERNAME">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>
+            GitHub
+          </a>
+          <a href="https://scholar.google.com/citations?user=ID">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5L2 9.5Z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/></svg>
+            Google Scholar
+          </a>
+          <a href="assets/cv.pdf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+            CV
+          </a>
+          -->
+        </div>
+      </section>
+
+      <!-- ============ Interests ============ -->
+      <section class="section" aria-labelledby="interests-title">
+        <h2 class="section-title" id="interests-title">Research interests</h2>
+        <ul class="interests">
+          <li class="tag">Representation learning</li>
+          <li class="tag">Knowledge distillation</li>
+          <li class="tag">Cell Painting &amp; image-based profiling</li>
+          <li class="tag">Cross-laboratory generalization</li>
+          <li class="tag">Retrieval &amp; late fusion</li>
+        </ul>
+      </section>
+
+      <!-- ============ Projects ============ -->
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <h2 class="section-title" id="projects-title">Projects</h2>
+
+        <a class="project-card" href="projects/pixels-and-profiles.html">
+          <div class="project-thumb" aria-hidden="true">
+            <!-- Stylised five-channel Cell Painting field -->
+            <svg viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="0.7"/>
+                </filter>
+                <g id="cell">
+                  <ellipse rx="34" ry="25" fill="#3fbf7f" fill-opacity="0.16" stroke="#ff7a45" stroke-opacity="0.8" stroke-width="1.6"/>
+                  <ellipse rx="13.5" ry="11" fill="#4c7dff" fill-opacity="0.9"/>
+                  <circle cx="3" cy="-2" r="2.6" fill="#f2c14e"/>
+                  <circle cx="-4" cy="3" r="1.8" fill="#f2c14e" fill-opacity="0.8"/>
+                  <g fill="#e0479e" fill-opacity="0.85">
+                    <circle cx="-22" cy="-6" r="1.7"/><circle cx="-19" cy="9" r="1.5"/>
+                    <circle cx="21" cy="-9" r="1.6"/><circle cx="24" cy="5" r="1.5"/>
+                    <circle cx="6" cy="-18" r="1.4"/><circle cx="-6" cy="17" r="1.5"/>
+                    <circle cx="15" cy="15" r="1.3"/><circle cx="-14" cy="-16" r="1.3"/>
+                  </g>
+                </g>
+              </defs>
+              <rect width="240" height="180" fill="#0a0c11"/>
+              <g filter="url(#glow)">
+                <use href="#cell" transform="translate(58 52) rotate(-18)"/>
+                <use href="#cell" transform="translate(150 40) rotate(12) scale(0.9)"/>
+                <use href="#cell" transform="translate(196 112) rotate(-30) scale(0.95)"/>
+                <use href="#cell" transform="translate(106 118) rotate(24) scale(1.05)"/>
+                <use href="#cell" transform="translate(30 146) rotate(8) scale(0.85)"/>
+                <use href="#cell" transform="translate(232 18) rotate(40) scale(0.8)"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="project-body">
+            <p class="project-meta">Research · 2026</p>
+            <h3 class="project-title">Learning from Pixels and Profiles: Dual-Teacher Distillation for Cross-Laboratory Cell Painting Retrieval</h3>
+            <p class="project-desc">
+              A 21.7 M-parameter ViT-S student, taught by CellProfiler consensus profiles and
+              frozen DINOv2 features, outperforms 14× larger frozen models on held-out JUMP
+              laboratories and complements CellProfiler in fusion.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Cell Painting</span>
+              <span class="tag">JUMP</span>
+              <span class="tag">Distillation</span>
+              <span class="tag">Retrieval</span>
+            </div>
+            <span class="project-more">View project <span>→</span></span>
+          </div>
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <p style="margin:0">
+        Reach me at <a href="mailto:wok016@ucsd.edu">wok016@ucsd.edu</a>.
+        <br>© 2026 Wonmin Kim
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>

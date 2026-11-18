@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixels and Profiles</title>
+  <meta name="description" content="Learning from Pixels and Profiles: Dual-Teacher Distillation for Cross-Laboratory Cell Painting Retrieval — Wonmin Kim and Johannes Schöneberg, UC San Diego.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=JetBrains+Mono:wght@400&display=swap">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="site-header">
+      <a class="brand" href="../index.html">Wonmin Kim</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#projects">Projects</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ Title block ============ -->
+      <section class="paper-hero">
+        <!-- TODO: replace with the venue once accepted, e.g. "CVPR 2027" or "arXiv 2026" -->
+        <p class="eyebrow">Research · 2026</p>
+
+        <div class="channel-bar" aria-hidden="true">
+          <span style="background:var(--ch-dna)"></span>
+          <span style="background:var(--ch-er)"></span>
+          <span style="background:var(--ch-rna)"></span>
+          <span style="background:var(--ch-agp)"></span>
+          <span style="background:var(--ch-mito)"></span>
+        </div>
+
+        <h1 class="paper-title">
+          Learning from Pixels and Profiles
+          <span class="subtitle">Dual-Teacher Distillation for <span class="nowrap">Cross-Laboratory</span> Cell Painting Retrieval</span>
+        </h1>
+
+        <p class="authors">
+          <a href="../index.html">Wonmin Kim</a><sup>1,2</sup>,
+          Johannes Schöneberg<sup>2,3</sup>
+        </p>
+        <p class="affil">
+          <sup>1</sup>Electrical and Computer Engineering &nbsp;·&nbsp;
+          <sup>2</sup>Pharmacology &nbsp;·&nbsp;
+          <sup>3</sup>Chemistry &amp; Biochemistry
+          <br>University of California San Diego
+        </p>
+
+        <div class="btn-row">
+          <!-- TODO: when the paper and code are public, change these to <a class="btn" href="..."> and drop "is-disabled" -->
+          <span class="btn is-disabled" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></svg>
+            Paper (soon)
+          </span>
+          <span class="btn secondary is-disabled" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>
+            Code (soon)
+          </span>
+          <a class="btn secondary" href="#citation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h4v4H8c0 2 1 3 3 3v2c-3 0-4-2-4-5V7ZM14 7h4v4h-3c0 2 1 3 3 3v2c-3 0-4-2-4-5V7Z"/></svg>
+            BibTeX
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ TL;DR + key numbers + teaser ============ -->
+      <div class="intro">
+        <p class="tldr">
+          <strong>TL;DR</strong>
+          For cross-laboratory Cell Painting retrieval, what an image model is taught matters more
+          than its size. A small ViT-S student, taught by CellProfiler consensus profiles and frozen
+          DINOv2 features, beats much larger frozen models — and errs differently from CellProfiler,
+          so fusing the two beats either alone.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-num">21.7 M</span>
+            <span class="stat-label">parameters — 14× smaller than Cell-DINO</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">2.7–3.0 h</span>
+            <span class="stat-label">GPU-hours to train one student</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">2.60 → 3.79</span>
+            <span class="stat-label">CellProfiler mAP (%) once fused with the student</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">90 vs. 45</span>
+            <span class="stat-label">compounds retrieved above chance, position-free</span>
+          </div>
+        </div>
+
+        <figure class="figure narrow">
+          <a class="figure-img" href="../assets/figures/fig1.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/fig1.png" width="1005" height="705"
+                 alt="Scatter plot of position-free NSSL mAP against standard cross-laboratory NSS mAP for image models and fusions with CellProfiler. The distilled student sits above DINOv2 ViT-B, Cell-DINO ViT-L and the released embeddings; CP fused with the three-student ensemble is highest on both axes.">
+          </a>
+          <figcaption>
+            <b>Figure 1.</b> A small distilled student scores above larger frozen models and
+            released embeddings, including Cell Painting foundation models; three students fused
+            with CellProfiler score highest. Macro mAP on cpg-target2, five laboratories held out
+            from training, at the standard cross-laboratory level (NSS) and with same-well
+            candidates also excluded (NSSL).
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- ============ Motivation ============ -->
+      <section class="section prose" aria-labelledby="motivation">
+        <h2 id="motivation">Motivation</h2>
+        <p>
+          The standard test of a Cell Painting representation is whether a perturbation imaged
+          in one laboratory retrieves its replicates imaged in another. On this test,
+          hand-engineered CellProfiler (CP) features still outperform frozen foundation models,
+          including models trained on Cell Painting images.
+        </p>
+        <p>
+          Making the model bigger does not close the gap: channel-wise DINOv2 scores 2.32 % mAP
+          as ViT-S and 2.33 % as ViT-B. So instead of asking how large an image model should be,
+          we ask <em>what it should be taught</em>.
+        </p>
+      </section>
+
+      <!-- ============ Method ============ -->
+      <section class="section prose" aria-labelledby="method">
+        <h2 id="method">Method: distill, then fuse</h2>
+        <p>
+          We teach the student what CellProfiler measures while keeping what a vision foundation
+          model sees. A ViT-S/14 initialised from DINOv2-S reads four-channel crops and learns
+          from two teachers of different modality; at test time it is late-fused with CP.
+        </p>
+
+        <figure class="figure wide">
+          <a class="figure-img" href="../assets/figures/fig2.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/fig2.png" width="2075" height="566"
+                 alt="Method diagram. (a) Training: a four-channel ViT-S/14 student reads 224-pixel crops of a tile; a DINOv2 head regresses frozen channel-wise DINOv2 ViT-B/14 features of the tile, and a CP head regresses a CellProfiler consensus of replicate wells in other batches and at other well names. (b) Retrieval: an ensemble of three students is late-fused with CellProfiler at weight w to rank candidates.">
+          </a>
+          <figcaption>
+            <b>Figure 2.</b> (a) The student's DINOv2 head regresses frozen DINOv2 features of
+            each channel of the tile; its CP head regresses a CellProfiler consensus of replicate
+            wells in other batches and at other well names. (b) On unseen laboratories, three
+            seeds form an ensemble that is late-fused with CP at a weight set on development
+            laboratories.
+          </figcaption>
+        </figure>
+
+        <div class="points">
+          <div class="point">
+            <h3><span class="dot" style="background:var(--ch-agp)"></span>Profile teacher</h3>
+            <p>The CP consensus of the well's compound, averaged over replicates in other batches and at other well names — so it carries the compound's morphology, not the well's batch or position.</p>
+          </div>
+          <div class="point">
+            <h3><span class="dot" style="background:var(--ch-dna)"></span>Pixel teacher</h3>
+            <p>Frozen channel-wise DINOv2 ViT-B/14 features of the same tile. They hold the student near its pretrained features; with the CP target alone it falls below its initialisation.</p>
+          </div>
+          <div class="point">
+            <h3><span class="dot" style="background:var(--accent)"></span>Fusion with CP</h3>
+            <p>Because the student reads pixels instead of CP's segmentation, it approaches CP's signal while making different errors — which late fusion turns into a gain.</p>
+          </div>
+        </div>
+
+        <p class="callout">
+          <strong>When does a second view help?</strong> A two-view signal-detection model says a
+          view adds to CP whenever its error correlation with CP is below the ratio of their
+          separations. For the student, ρ ≈ 0.19–0.20 against d₂/d₁ ≈ 0.95, predicting an optimal
+          fusion weight w* = 0.49 — the observed optimum is 0.4–0.5.
+        </p>
+      </section>
+
+      <!-- ============ Position shortcut ============ -->
+      <section class="section prose" aria-labelledby="evaluation">
+        <h2 id="evaluation">Evaluation without the position shortcut</h2>
+        <p>
+          JUMP reuses plate layouts across laboratories: 89.8 % of cross-laboratory replicate
+          pairs on 384-well plates share a well. A baseline that knows only the well name —
+          nothing about cells — reaches 39.8 % mAP at the standard level, against 2.6 % for
+          CellProfiler. We therefore report every result also with same-well candidates excluded
+          (NSL, NSSL) and read these position-free levels as decisive.
+        </p>
+
+        <figure class="figure wide">
+          <a class="figure-img" href="../assets/figures/fig3.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/fig3.png" width="2085" height="569" loading="lazy"
+                 alt="(a) Three labs where two share plate layout A, so a compound sits at the same well D05. (b) Table of which candidates each evaluation level keeps: NR, NSS, NSL, NSSL. (c) Bar chart on a log scale: the well-name-only baseline reaches 39.8 percent mAP at NSS but drops to chance at NSSL, where CP fused with the ensemble leads at 0.57 percent.">
+          </a>
+          <figcaption>
+            <b>Figure 3.</b> Why we exclude same-well candidates. (a) Shared plate maps put a
+            compound at the same well in different labs. (b) The candidates each level keeps.
+            (c) The well-name baseline beats every model at least ninefold at NSS and drops to
+            chance at NSSL, where fusions of CP with an image view lead.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ Results ============ -->
+      <section class="section prose" aria-labelledby="results">
+        <h2 id="results">Results</h2>
+        <p>
+          On five JUMP laboratories held out from training and selection, the student outperforms
+          its image teacher and the 14× larger microscopy model Cell-DINO at every level. Fused
+          with CP, it improves on CP in every setting tested; the three-student ensemble fused with
+          CP is best overall. Every design was fixed on development laboratories and scored once.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>cpg-target2 · macro mAP (%)</th>
+                <th class="num">NSS</th>
+                <th class="num">NSL</th>
+                <th class="num">NSSL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="dim"><td>chance</td><td class="num">0.35</td><td class="num">0.20</td><td class="num">0.21</td></tr>
+              <tr><td>CP(full)</td><td class="num">2.60</td><td class="num">0.42</td><td class="num">0.39</td></tr>
+              <tr><td>DINOv2 (frozen ViT-B, 86.6 M)</td><td class="num">2.33</td><td class="num">0.39</td><td class="num">0.41</td></tr>
+              <tr><td>Cell-DINO (frozen ViT-L, 303 M)</td><td class="num">1.78</td><td class="num">0.33</td><td class="num">0.32</td></tr>
+              <tr><td>student (ViT-S, 21.7 M)<span class="ours">ours</span></td><td class="num">2.95</td><td class="num">0.44</td><td class="num">0.45</td></tr>
+              <tr class="split"><td>CP ⊕ DINOv2</td><td class="num">3.51</td><td class="num">0.46</td><td class="num">0.51</td></tr>
+              <tr><td>CP ⊕ student<span class="ours">ours</span></td><td class="num">3.79</td><td class="num">0.48</td><td class="num">0.52</td></tr>
+              <tr><td>ensemble (3 students)<span class="ours">ours</span></td><td class="num">3.62</td><td class="num">0.49</td><td class="num">0.51</td></tr>
+              <tr class="best"><td>CP ⊕ ensemble<span class="ours">ours</span></td><td class="num">4.28</td><td class="num">0.52</td><td class="num">0.57</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">NSS: query's laboratory removed (standard level). NSL / NSSL: same-well candidates also excluded (position-free).</p>
+
+        <figure class="figure narrow">
+          <a class="figure-img" href="../assets/figures/fig4.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/fig4.png" width="980" height="718" loading="lazy"
+                 alt="Two-panel dot plot over thirteen image views at NSSL. (a) The student has the highest mAP alone. (b) Fusion with CP minus CP alone: the student gives the largest gain, and gains track each view's own mAP.">
+          </a>
+          <figcaption>
+            <b>Figure 4.</b> The better the view, the more it adds to CP. (a) Thirteen image views
+            alone; (b) their fusion with CP minus CP(full), with 95 % CIs. A view's gain tracks its
+            own position-free mAP (Spearman 0.96); the student is highest on both.
+          </figcaption>
+        </figure>
+
+        <figure class="figure wide">
+          <a class="figure-img" href="../assets/figures/fig5.png" target="_blank" rel="noopener">
+            <img src="../assets/figures/fig5.png" width="2004" height="617" loading="lazy"
+                 alt="(a) Bar chart of compounds retrieved above chance at NSSL: CP 45, CP fused with DINOv2 56, CP fused with the ensemble 90. (b) Per-compound AP scatter: CP fused with the ensemble is higher for 69 of 92 compounds. (c) Laboratory-pair scatter: CP fused with the ensemble beats CP in 50 of 50 pairs.">
+          </a>
+          <figcaption>
+            <b>Figure 5.</b> The fused ensemble gains across compounds and laboratory pairs
+            (NSSL). (a) It retrieves 90 of 293 query compounds above chance, twice as many as CP;
+            (b) it scores higher than CP ⊕ DINOv2 on 69 of 92 compounds; (c) it beats CP in all
+            50 query–gallery laboratory pairs.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ Citation ============ -->
+      <section class="section prose" id="citation" aria-labelledby="cite-title">
+        <h2 id="cite-title">Citation</h2>
+        <div class="bibtex">
+          <!-- TODO: update the entry type, venue and year once published -->
+          <pre><code id="bibtex">@misc{kim2026pixels,
+  title  = {Learning from Pixels and Profiles: Dual-Teacher
+            Distillation for Cross-Laboratory Cell Painting Retrieval},
+  author = {Kim, Wonmin and Sch{\"o}neberg, Johannes},
+  year   = {2026}
+}</code></pre>
+          <button class="copy-btn" type="button" data-copy="bibtex">Copy</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p style="margin:0">© 2026 Wonmin Kim · <a href="../index.html">Back to home</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var text = document.getElementById(btn.dataset.copy).textContent;
+        var done = function () {
+          btn.textContent = "Copied";
+          setTimeout(function () { btn.textContent = "Copy"; }, 1600);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(done);
+        } else {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); done(); } catch (e) {}
+          document.body.removeChild(ta);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
