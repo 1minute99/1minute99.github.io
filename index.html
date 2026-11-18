@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
-  <link rel="stylesheet" href="assets/style.css?v=6">
+  <link rel="stylesheet" href="assets/style.css?v=7">
 </head>
 <body>
   <div class="container">
@@ -30,7 +30,7 @@
       <!-- ============ About ============ -->
       <section class="hero" id="about">
         <div class="hero-head">
-          <img class="avatar" src="assets/profile.jpg" width="480" height="480" alt="Photo of Wonmin Kim">
+          <img class="avatar" src="assets/profile.jpg?v=2" width="400" height="400" alt="Photo of Wonmin Kim">
           <div>
             <h1>Wonmin Kim</h1>
             <p class="role">M.S. Student · Electrical and Computer Engineering · UC San Diego</p>
@@ -94,14 +94,53 @@
       <!-- ============ Interests ============ -->
       <section class="section" aria-labelledby="interests-title">
         <h2 class="section-title" id="interests-title">Research interests</h2>
-        <ul class="interests">
-          <li class="tag">AI for biology</li>
-          <li class="tag">AI for drug discovery</li>
-          <li class="tag">Computer vision</li>
-          <li class="tag">Self-supervised learning</li>
-          <li class="tag">Knowledge distillation</li>
-          <li class="tag">Distribution shift &amp; generalization</li>
-        </ul>
+        <div class="interests-row">
+          <ul class="interests">
+            <li class="tag">AI for biology</li>
+            <li class="tag">AI for drug discovery</li>
+            <li class="tag">Computer vision</li>
+            <li class="tag">Self-supervised learning</li>
+            <li class="tag">Knowledge distillation</li>
+            <li class="tag">Distribution shift &amp; generalization</li>
+          </ul>
+
+          <!-- AI x Bio: a cell's mitochondria light up, signals flow into a small network that fires layer by layer -->
+          <svg class="aixbio" viewBox="0 0 240 120" role="img" aria-label="Animation: signals from a cell's mitochondria flow into a small neural network">
+            <g class="ab-cell">
+              <ellipse class="ab-membrane" cx="46" cy="60" rx="38" ry="27" transform="rotate(-14 46 60)"/>
+              <ellipse class="ab-nucleus" cx="49" cy="62" rx="12" ry="9"/>
+              <g class="ab-mito">
+                <path d="M16 64 q6 -7 14 -6" style="--d:0s"/>
+                <path d="M22 48 q8 -6 16 -4" style="--d:.3s"/>
+                <path d="M38 40 q6 -3 12 -2" style="--d:.6s"/>
+                <path d="M60 44 q8 -2 13 4" style="--d:.9s"/>
+                <path d="M68 58 q6 -4 10 -1" style="--d:1.2s"/>
+                <path d="M64 74 q8 -2 12 -9" style="--d:1.5s"/>
+                <path d="M40 82 q6 1 12 -2" style="--d:1.8s"/>
+                <path d="M24 74 q8 2 14 -2" style="--d:2.1s"/>
+              </g>
+            </g>
+            <g class="ab-flow">
+              <circle cx="88" cy="52" r="2.6" style="--d:0s; fill:#4c7dff"/>
+              <circle cx="88" cy="60" r="2.6" style="--d:.8s; fill:#3fbf5f"/>
+              <circle cx="88" cy="68" r="2.6" style="--d:1.6s; fill:#e8a33a"/>
+            </g>
+            <g class="ab-edges">
+              <line x1="160" y1="40" x2="192" y2="30"/><line x1="160" y1="40" x2="192" y2="50"/><line x1="160" y1="40" x2="192" y2="70"/><line x1="160" y1="40" x2="192" y2="90"/>
+              <line x1="160" y1="60" x2="192" y2="30"/><line x1="160" y1="60" x2="192" y2="50"/><line x1="160" y1="60" x2="192" y2="70"/><line x1="160" y1="60" x2="192" y2="90"/>
+              <line x1="160" y1="80" x2="192" y2="30"/><line x1="160" y1="80" x2="192" y2="50"/><line x1="160" y1="80" x2="192" y2="70"/><line x1="160" y1="80" x2="192" y2="90"/>
+              <line x1="192" y1="30" x2="224" y2="48"/><line x1="192" y1="30" x2="224" y2="72"/>
+              <line x1="192" y1="50" x2="224" y2="48"/><line x1="192" y1="50" x2="224" y2="72"/>
+              <line x1="192" y1="70" x2="224" y2="48"/><line x1="192" y1="70" x2="224" y2="72"/>
+              <line x1="192" y1="90" x2="224" y2="48"/><line x1="192" y1="90" x2="224" y2="72"/>
+            </g>
+            <g class="ab-nodes">
+              <circle class="ab-node l1" cx="160" cy="40" r="4.5"/><circle class="ab-node l1" cx="160" cy="60" r="4.5"/><circle class="ab-node l1" cx="160" cy="80" r="4.5"/>
+              <circle class="ab-node l2" cx="192" cy="30" r="4.5"/><circle class="ab-node l2" cx="192" cy="50" r="4.5"/><circle class="ab-node l2" cx="192" cy="70" r="4.5"/><circle class="ab-node l2" cx="192" cy="90" r="4.5"/>
+              <circle class="ab-node l3" cx="224" cy="48" r="4.5"/><circle class="ab-node l3" cx="224" cy="72" r="4.5"/>
+            </g>
+          </svg>
+        </div>
       </section>
 
       <!-- ============ Projects ============ -->
