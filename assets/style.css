@@ -210,7 +210,7 @@ a.project-card:hover {
   border-radius: 10px;
   background: #0a0c11;
 }
-.project-thumb svg { display: block; width: 100%; height: 100%; }
+.project-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .project-body { display: flex; flex-direction: column; min-width: 0; padding: 2px 4px 2px 0; }
 
