@@ -391,14 +391,9 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* ---------- Figures (from the manuscript) ---------- */
 
 .figure { margin: 28px 0 0; }
-.figure.wide {
-  width: min(960px, calc(100vw - 40px));
-  margin-left: 50%;
-  transform: translateX(-50%);
-}
 .figure-img {
   display: block;
-  padding: 18px;
+  padding: 14px;
   border: 1px solid var(--border);
   border-radius: 14px;
   background: #ffffff;
@@ -409,8 +404,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .figure-img img { display: block; width: 100%; height: auto; margin: 0 auto; }
 .figure.narrow .figure-img img { max-width: 500px; }
 .figure figcaption {
-  max-width: 720px;
-  margin: 12px auto 0;
+  margin: 12px 0 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.6;
