@@ -123,6 +123,27 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   font-size: 1.05rem;
 }
 
+.hero-head {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.hero-head .role { margin: 0; }
+.avatar {
+  flex: none;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface-2);
+  box-shadow: 0 0 0 1px var(--border);
+}
+@media (max-width: 520px) {
+  .hero-head { gap: 16px; }
+  .avatar { width: 92px; height: 92px; }
+}
+
 .bio p { margin: 0 0 12px; max-width: 64ch; }
 .bio .bio-status { margin-top: 4px; }
 .bio .bio-status strong { color: var(--accent); font-weight: 600; }
