@@ -393,6 +393,12 @@ a.project-card:hover {
   line-height: 1.15;
   letter-spacing: -0.015em;
 }
+/* One-line titles too long for the title/subtitle split */
+.paper-title.long {
+  max-width: 24em;
+  font-size: clamp(1.5rem, 4.2vw, 2.15rem);
+  line-height: 1.22;
+}
 .paper-title .subtitle {
   display: block;
   max-width: 34em;
