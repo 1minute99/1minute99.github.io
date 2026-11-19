@@ -526,10 +526,6 @@ a.project-card:hover {
 .figure-img img { display: block; width: 100%; height: auto; margin: 0 auto; }
 .figure.narrow .figure-img img { max-width: 500px; }
 .figure.small .figure-img img { max-width: 320px; }
-/* Wide, short figures break out of the 720px text column on large screens */
-@media (min-width: 1000px) {
-  .figure.wide .figure-img { margin-inline: calc(50% - min(520px, 50vw - 32px)); }
-}
 .figure figcaption {
   margin: 12px 0 0;
   color: var(--muted);
