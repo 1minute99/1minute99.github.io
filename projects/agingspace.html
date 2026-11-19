@@ -3,15 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mitochondrial Aging Axis</title>
-  <meta name="description" content="Representation learning on live-cell mitochondrial images defines an aging axis and age-dependent drug responses in primary human fibroblasts — Elisavetta Ilyin, Wonmin Kim and Johannes Schöneberg, UC San Diego. Manuscript in preparation.">
+  <title>Mitochondrial Aging Axis · Wonmin Kim</title>
+  <meta name="description" content="A self-supervised model on live-cell mitochondrial images of 144,624 fibroblasts tells adult from neonatal donors and reveals age-dependent drug responses.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://1minute99.github.io/projects/agingspace.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Wonmin Kim">
+  <meta property="og:title" content="Representation learning on live-cell mitochondrial images defines an aging axis and age-dependent drug responses in primary human fibroblasts">
+  <meta property="og:description" content="A self-supervised model on live-cell mitochondrial images of 144,624 fibroblasts tells adult from neonatal donors and reveals age-dependent drug responses.">
+  <meta property="og:url" content="https://1minute99.github.io/projects/agingspace.html">
+  <meta property="og:image" content="https://1minute99.github.io/assets/thumbs/agingspace.jpg">
+  <meta property="og:image:width" content="490">
+  <meta property="og:image:height" content="368">
+  <meta property="og:image:alt" content="Live human fibroblast with its mitochondria stained green">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../favicon.ico?v=3" sizes="32x32">
   <link rel="icon" href="../assets/favicon.svg?v=3" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
-  <link rel="stylesheet" href="../assets/style.css?v=12">
+  <link rel="stylesheet" href="../assets/style.css?v=13">
 </head>
 <body>
   <div class="container">
@@ -26,7 +38,6 @@
 
     <main>
       <!-- ============ Title block ============ -->
-      <!-- Manuscript Fig. 5 (the axis screen and its candidate compounds) is confidential until publication and deliberately left out. -->
       <section class="paper-hero">
         <p class="eyebrow">Research · 2026 <span class="status muted">Manuscript in preparation</span></p>
 
@@ -125,7 +136,7 @@
 
         <figure class="figure">
           <a class="figure-img" href="../assets/figures/agingspace/pipeline.png?v=2" target="_blank" rel="noopener">
-            <img src="../assets/figures/agingspace/pipeline.png?v=2" width="1886" height="1766"
+            <img src="../assets/figures/agingspace/pipeline.webp" width="1380" height="1292" loading="lazy" decoding="async"
                  alt="Study overview. (a) Primary dermal fibroblasts from neonatal donors and adult donors aged 45, 48 and 49. (b) The compound library, drawn on a cell schematic by target and grouped by mechanism. (c) Live fibroblasts stained with MitoTracker Green and TMRM, imaged in 96-well plates. (d) Single-cell segmentation and preprocessing. (e) Self-supervised training with an online and an EMA target network, a view-consistency loss and an MMD loss that aligns untreated control cells across plates. (f) The frozen encoder's embedding, coloured by donor and by drug, interpreted with handcrafted features.">
           </a>
           <figcaption>
@@ -168,7 +179,7 @@
           embedding (AUC 0.92) captured more of it than all handcrafted features together (0.86).
         </p>
 
-        <figure class="figure">
+        <figure class="figure wide">
           <a class="figure-img" href="../assets/figures/agingspace/age.png" target="_blank" rel="noopener">
             <img src="../assets/figures/agingspace/age.png" width="1607" height="549" loading="lazy"
                  alt="(a) UMAP of the embedding shown twice, with contours around half of each donor's untreated cells: neonatal donors cluster in one region, adult donors in another. (b) Violin plots of the held-out probability of being adult: adult donors A, B and C are mostly read as adult (92, 74 and 72 percent), neonatal donors mostly as neonatal (87, 89 and 89 percent).">
@@ -244,7 +255,7 @@
           distinction only single-cell data can make.
         </p>
 
-        <figure class="figure">
+        <figure class="figure wide">
           <a class="figure-img" href="../assets/figures/agingspace/divergence.png" target="_blank" rel="noopener">
             <img src="../assets/figures/agingspace/divergence.png" width="1517" height="447" loading="lazy"
                  alt="(d) Response agreement between plates: about 0.39 for the same donor, 0.32 for adult pairs, 0.37 for neonatal pairs and 0.26 for adult versus neonatal, a drop of 0.09. (e) Response size in neonatal relative to adult cells for 37 compounds, ranging from about twofold larger in adult cells to over threefold larger in neonatal cells.">

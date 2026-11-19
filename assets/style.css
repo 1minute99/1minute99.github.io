@@ -3,12 +3,14 @@
    ========================================================================== */
 
 :root {
+  color-scheme: light dark;
   --bg: #fafaf8;
   --surface: #ffffff;
   --surface-2: #f2f2ef;
   --text: #1a1c20;
   --muted: #5b606b;
-  --faint: #8a8f99;
+  --faint: #686d77;
+  --rule: #8a8f99;   /* decorative strokes; --faint is for text */
   --border: #e4e4e0;
   --accent: #2d5bd1;
   --accent-soft: #edf2fd;
@@ -34,7 +36,8 @@
     --surface-2: #1f2126;
     --text: #e9e9e6;
     --muted: #a3a7b0;
-    --faint: #767a85;
+    --faint: #868a95;
+    --rule: #767a85;
     --border: #2a2c32;
     --accent: #8fabff;
     --accent-soft: #1a2340;
@@ -200,7 +203,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .hero-head > div { flex: 1 1 auto; min-width: 0; }
 .aixbio { display: block; flex: none; width: 210px; height: auto; margin-left: auto; overflow: visible; }
 
-.ab-membrane { fill: #3fbf5f; fill-opacity: 0.07; stroke: var(--faint); stroke-width: 1.2; }
+.ab-membrane { fill: #3fbf5f; fill-opacity: 0.07; stroke: var(--rule); stroke-width: 1.2; }
 .ab-nucleus { fill: #4c7dff; fill-opacity: 0.85; }
 .ab-mito path {
   fill: none;
@@ -215,7 +218,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   animation: ab-flow 2.4s linear infinite;
   animation-delay: var(--d, 0s);
 }
-.ab-edges line { stroke: var(--faint); stroke-opacity: 0.45; stroke-width: 1.1; }
+.ab-edges line { stroke: var(--rule); stroke-opacity: 0.45; stroke-width: 1.1; }
 .ab-node {
   fill: var(--surface);
   stroke: var(--accent);
@@ -417,6 +420,7 @@ a.project-card:hover {
 .authors sup { color: var(--faint); font-size: 0.7em; }
 .affil { margin: 0; color: var(--muted); font-size: 14px; }
 
+.not-found-text { margin: 14px 0 0; color: var(--muted); }
 .btn-row {
   display: flex;
   flex-wrap: wrap;
@@ -522,6 +526,10 @@ a.project-card:hover {
 .figure-img img { display: block; width: 100%; height: auto; margin: 0 auto; }
 .figure.narrow .figure-img img { max-width: 500px; }
 .figure.small .figure-img img { max-width: 320px; }
+/* Wide, short figures break out of the 720px text column on large screens */
+@media (min-width: 1000px) {
+  .figure.wide .figure-img { margin-inline: calc(50% - min(520px, 50vw - 32px)); }
+}
 .figure figcaption {
   margin: 12px 0 0;
   color: var(--muted);
@@ -603,7 +611,7 @@ tbody tr:last-child td { border-bottom: 0; }
 td.num, th.num { text-align: right; }
 tr.best td { font-weight: 600; background: var(--accent-soft); }
 tr.dim td { color: var(--faint); }
-tr.split td { border-top: 1px solid var(--faint); }
+tr.split td { border-top: 1px solid var(--rule); }
 td .ours { color: var(--accent); font-size: 12px; font-weight: 600; margin-left: 4px; }
 
 @media (max-width: 620px) {
